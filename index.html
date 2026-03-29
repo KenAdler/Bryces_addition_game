@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Can 100 People Stay Alive? | Bryce's Math Challenge</title>
+  <title id="page-title">Can 10 People Stay Alive? | Bryce's Math Challenge</title>
   <link rel="stylesheet" href="src/style.css" />
 </head>
 <body>
@@ -21,10 +21,10 @@
         </div>
         <div class="host-badge">BRYCE BEAST</div>
       </div>
-      <h1 class="title-main">CAN 100 PEOPLE<br>STAY ALIVE?</h1>
+      <h1 class="title-main" id="main-title">CAN 10 PEOPLE<br>STAY ALIVE?</h1>
       <h2 class="title-sub">Bryce's Math Platform Challenge</h2>
       <p class="title-desc">
-        Bryce vs. 10 challengers. Addition only.<br>
+        Bryce vs. <span id="desc-count">10</span> challengers. Addition only.<br>
         Get it WRONG — you FALL off the platform.<br>
         Last one standing wins <span class="gold">$1,000!</span>
       </p>
@@ -87,6 +87,13 @@
 <script src="src/contestants.js"></script>
 <script src="src/game.js"></script>
 <script>
+  // Derive opponent count from TOTAL (defined in contestants.js)
+  const opponents = TOTAL - 1;
+  document.getElementById('main-title').innerHTML  = `CAN ${opponents} PEOPLE<br>STAY ALIVE?`;
+  document.getElementById('desc-count').textContent = opponents;
+  document.getElementById('page-title').textContent = `Can ${opponents} People Stay Alive? | Bryce's Math Challenge`;
+  document.getElementById('alive-count').textContent = TOTAL;
+
   // Show intro on page load
   document.getElementById('screen-intro').style.display = 'flex';
 </script>

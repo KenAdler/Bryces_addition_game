@@ -331,7 +331,7 @@ function showWin(winner) {
   `;
 
   el('win-sub').textContent = winner.isPlayer
-    ? 'You outlasted all 10 other contestants in Bryce\'s Math Challenge!'
+    ? `You outlasted all ${TOTAL - 1} other contestants in Bryce's Math Challenge!`
     : `${winner.name} the ${winner.ageGroup.label} was the last one standing!`;
 
   spawnConfetti();
