@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Can 100 People Stay Alive? | Bryce's Math Challenge</title>
+  <link rel="stylesheet" href="src/style.css" />
+</head>
+<body>
+<div id="app">
+
+  <!-- ══════════ INTRO ══════════ -->
+  <div id="screen-intro" class="screen">
+    <div class="intro-bg"></div>
+    <div class="intro-content">
+      <div class="host-wrap">
+        <div class="host-ring">
+          <img src="media/Bryce.JPG" alt="Bryce" class="host-photo"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <div class="host-fallback" style="display:none">🧒</div>
+        </div>
+        <div class="host-badge">BRYCE BEAST</div>
+      </div>
+      <h1 class="title-main">CAN 100 PEOPLE<br>STAY ALIVE?</h1>
+      <h2 class="title-sub">Bryce's Math Platform Challenge</h2>
+      <p class="title-desc">
+        Bryce vs. 10 challengers. Addition only.<br>
+        Get it WRONG — you FALL off the platform.<br>
+        Last one standing wins <span class="gold">$1,000!</span>
+      </p>
+      <button class="btn-play" onclick="startGame()">▶ PLAY NOW</button>
+      <button class="btn-watch" onclick="watchMode()">👁 WATCH MODE</button>
+    </div>
+  </div>
+
+  <!-- ══════════ GAME ══════════ -->
+  <div id="screen-game" class="screen" style="display:none">
+
+    <!-- Header bar -->
+    <div class="game-header">
+      <div class="hd-host">🧒 BRYCE BEAST</div>
+      <div class="alive-box">
+        <span class="alive-num" id="alive-count">11</span>
+        <span class="alive-lbl">ALIVE</span>
+      </div>
+      <div class="hd-prize">$1,000 PRIZE</div>
+    </div>
+
+    <!-- Platform grid -->
+    <div class="platform-zone" id="platform-zone"></div>
+
+    <!-- Question panel -->
+    <div class="question-panel ai-turn" id="question-panel">
+      <div class="q-top">
+        <div class="cur-avatar" id="cur-avatar">🧒</div>
+        <div class="cur-info">
+          <div class="cur-name" id="cur-name">Contestant</div>
+          <div class="cur-age"  id="cur-age">Age</div>
+        </div>
+        <div class="announcer" id="announcer">Bryce asks...</div>
+      </div>
+      <div class="equation" id="equation">? + ? = ?</div>
+      <div class="choices-box" id="choices-box"></div>
+    </div>
+
+    <!-- Result overlay (inside game screen) -->
+    <div id="result-overlay" class="result-overlay" style="display:none">
+      <div id="result-content" class="result-content"></div>
+    </div>
+  </div>
+
+  <!-- ══════════ WIN ══════════ -->
+  <div id="screen-win" class="screen" style="display:none">
+    <div class="confetti-container" id="confetti-container"></div>
+    <div class="win-inner">
+      <h1 class="win-title">WE HAVE A WINNER!</h1>
+      <div id="winner-display"></div>
+      <div class="prize-won">$1,000!</div>
+      <p id="win-sub" class="win-sub"></p>
+      <button class="btn-play" onclick="restartGame()">PLAY AGAIN</button>
+    </div>
+  </div>
+
+</div>
+<script src="src/contestants.js"></script>
+<script src="src/game.js"></script>
+<script>
+  // Show intro on page load
+  document.getElementById('screen-intro').style.display = 'flex';
+</script>
+</body>
+</html>

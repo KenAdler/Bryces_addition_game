@@ -1,0 +1,6 @@
+video/frames/
+generate_video.py
+video-concept/
+transcription.md
+.DS_Store
+.claude/
