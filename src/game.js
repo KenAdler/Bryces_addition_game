@@ -32,11 +32,13 @@ function aiIsCorrect(contestant) {
 // ===== INIT =====
 function startGame() {
   autoPlayMode = false;
+  initAudio();
   initGame();
 }
 
 function watchMode() {
   autoPlayMode = true;
+  initAudio();
   initGame();
 }
 
@@ -54,6 +56,11 @@ function initGame() {
   updateAliveCount();
   hideResult();
   nextTurn();
+}
+
+function handleMute() {
+  const muted = toggleMute();
+  document.getElementById('mute-btn').textContent = muted ? '🔇' : '🔊';
 }
 
 function restartGame() {
@@ -136,9 +143,11 @@ function renderQuestion(c) {
   el('cur-age').textContent     = `${c.ageGroup.label} · Age ${c.ageGroup.ageRange}`;
   el('equation').textContent    = `${q.a}  +  ${q.b}  =  ?`;
 
-  // Panel highlight
-  el('question-panel').className = isPlayer ? 'question-panel player-turn' : 'question-panel ai-turn';
-  el('announcer').textContent   = isPlayer ? '🎤 BRYCE BEAST ASKS YOU!' : `🎤 Bryce asks ${c.name}...`;
+  // Panel highlight + music intensity
+  const panelClass = isPlayer ? 'question-panel player-turn' : 'question-panel ai-turn';
+  el('question-panel').className = panelClass;
+  el('announcer').textContent    = isPlayer ? '🎤 BRYCE BEAST ASKS YOU!' : `🎤 Bryce asks ${c.name}...`;
+  setIntensity(isPlayer ? 'player' : 'normal');
 
   renderChoices(q, c, isPlayer);
 }
@@ -206,12 +215,17 @@ function handlePlayerChoice(val, q, c) {
 
 // ===== RESULT =====
 function processResult(c, correct, q) {
+  setIntensity('normal');
   showResult(c, correct, q);
 
-  if (!correct) {
-    eliminateContestant(c);
-  } else {
+  if (correct) {
+    playCorrect();
+    announce('Correct!');
     flashCorrect(c);
+  } else {
+    playWrong();
+    announce('Wrong!');
+    eliminateContestant(c);
   }
 
   const delay = autoPlayMode ? 900 : (c.isPlayer ? 1800 : 1200);
